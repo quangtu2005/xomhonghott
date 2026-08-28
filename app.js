@@ -1,48 +1,48 @@
 // Link quảng cáo
 const adLink = "https://s.shopee.vn/2BEPjZwbdB";
 
-// Popup
+// Lấy popup
 const adPopup = document.getElementById("adPopup");
+
+// Lấy ảnh
 const adImage = document.getElementById("adImage");
+
+// Lấy nút X
 const adClose = document.getElementById("adClose");
 
-// Kiểm tra đã click lần đầu chưa
+// Đã click lần đầu chưa?
 let adClicked = false;
 
 
-// CLICK ẢNH
-adImage.addEventListener("click", function () {
+// ============================
+// XỬ LÝ CLICK
+// ============================
 
+function handleAdClick(event) {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    // LẦN 1
     if (!adClicked) {
 
-        // Lần 1 → mở link
         adClicked = true;
+
+        // Mở link quảng cáo
         window.open(adLink, "_blank");
 
-    } else {
-
-        // Lần 2 → đóng quảng cáo
-        adPopup.style.display = "none";
-
+        return;
     }
 
-});
+
+    // LẦN 2
+    adPopup.style.display = "none";
+}
 
 
-// CLICK DẤU X
-adClose.addEventListener("click", function () {
+// Click ảnh
+adImage.addEventListener("click", handleAdClick);
 
-    if (!adClicked) {
 
-        // Lần 1 → mở link
-        adClicked = true;
-        window.open(adLink, "_blank");
-
-    } else {
-
-        // Lần 2 → đóng quảng cáo
-        adPopup.style.display = "none";
-
-    }
-
-});
+// Click dấu X
+adClose.addEventListener("click", handleAdClick);
